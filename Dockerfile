@@ -1,5 +1,5 @@
 # Start with a Python 3.9-slim-buster base image.
-# We explicitly set the platform to linux/amd64 as per Adobe's requirements for compatibility.
+# We explicitly set the platform to linux/amd64 as per requirements for compatibility.
 FROM python:3.9-slim-buster --platform=linux/amd64
 
 # Set the working directory inside the Docker container to /app.
@@ -23,11 +23,11 @@ COPY . .
 CMD ["python", "-u", "process_pdfs.py"]
 
 # Important Note for Docker Execution & File Paths:
-# Adobe's evaluation system will mount input PDFs to '/app/input' and expect output JSONs in '/app/output'.
+# System will mount input PDFs to '/app/input' and expect output JSONs in '/app/output'.
 # Our 'process_pdfs.py' script currently uses relative paths (e.g., "sample-data_sets/PDFs/file03.pdf")
 # for testing convenience. When Docker is run by the judges, it will likely map their input files
 # into '/app/input' and mount an output directory to '/app/output'.
 # Your script should ideally be designed to read from '/app/input' and write to '/app/output'
-# directly, especially for Round 1B. For Round 1A, the provided Docker setup and mounting
-# scheme by Adobe typically handles the file accessibility for your existing script paths.
+# directly provided Docker setup and mounting
+# The file accessibility for your existing script paths.
 # The critical thing is that your script successfully executes and produces JSONs.
